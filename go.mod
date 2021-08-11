@@ -1,4 +1,4 @@
-module github.com/study-hary-id/hello-golang
+module github.com/study-hary-id/golang-simple-applications
 
 go 1.16
 
