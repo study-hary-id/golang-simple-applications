@@ -35,3 +35,20 @@ func Hello(name string) (string, error) {
 	message := fmt.Sprintf(randomFormat(), name)
 	return message, nil
 }
+
+// Hellos returns a map that associates each of the
+// named people with a greeting message.
+func Hellos(names []string) (map[string]string, error) {
+	messages := make(map[string]string)
+
+	for _, name := range names {
+		message, error := Hello(name)
+		if error != nil {
+			return nil, error
+		}
+
+		messages[name] = message
+	}
+
+	return messages, nil
+}

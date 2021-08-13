@@ -13,8 +13,10 @@ func main() {
 	log.SetPrefix("greeting: ")
 	log.SetFlags(0)
 
-	// Request a greeting message and expected an error.
-	message, error := greeting.Hello("Gladys")
+	names := []string{"Darrin", "Gladys", "Samantha"}
+
+	// Request a greeting message and check in if error exists
+	message, error := greeting.Hellos(names)
 	if error != nil {
 		log.Fatal(error)
 	}
