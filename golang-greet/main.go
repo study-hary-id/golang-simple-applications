@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
-	
+
 	"golang-greet/greeting"
 )
 
@@ -14,10 +14,10 @@ func main() {
 	log.SetFlags(0)
 
 	// Request a greeting message and expected an error.
-	message, error := greeting.Hello("")
+	message, error := greeting.Hello("Gladys")
 	if error != nil {
 		log.Fatal(error)
 	}
-	
+
 	fmt.Println(message)
 }

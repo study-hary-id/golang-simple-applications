@@ -3,7 +3,25 @@ package greeting
 import (
 	"errors"
 	"fmt"
+	"math/rand"
+	"time"
 )
+
+// init sets initial values for variables used in the function.
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
+
+// randomFormat returns one of a set of greeting messages.
+func randomFormat() string {
+	formats := []string{
+		"Hi, %v. Welcome!",
+		"Hail, %v! Well met!",
+		"Great to see you, %v!",
+	}
+
+	return formats[rand.Intn(len(formats))]
+}
 
 // Hello returns a greeting for the named person.
 func Hello(name string) (string, error) {
@@ -12,7 +30,8 @@ func Hello(name string) (string, error) {
 		return "", errors.New("Error: empty name")
 	}
 
-	// Return a greeting that embeds the name in a message.
-	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	// TODO: Force first character in the name to upper case.
+
+	message := fmt.Sprintf(randomFormat(), name)
 	return message, nil
 }
