@@ -16,9 +16,9 @@ func main() {
 	names := []string{"Darrin", "Gladys", "Samantha"}
 
 	// Request a greeting message and check in if error exists
-	message, error := greeting.Hellos(names)
-	if error != nil {
-		log.Fatal(error)
+	message, err := greeting.Hellos(names)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	fmt.Println(message)

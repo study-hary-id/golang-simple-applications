@@ -27,7 +27,7 @@ func randomFormat() string {
 func Hello(name string) (string, error) {
 	// If no name was given, return an error with a message.
 	if name == "" {
-		return "", errors.New("Error: empty name")
+		return "", errors.New("error: empty name")
 	}
 
 	// TODO: Force first character in the name to upper case.
@@ -42,9 +42,9 @@ func Hellos(names []string) (map[string]string, error) {
 	messages := make(map[string]string)
 
 	for _, name := range names {
-		message, error := Hello(name)
-		if error != nil {
-			return nil, error
+		message, err := Hello(name)
+		if err != nil {
+			return nil, err
 		}
 
 		messages[name] = message
