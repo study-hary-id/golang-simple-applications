@@ -39,20 +39,33 @@ func loadPage(title string) (*Page, error) {
 func viewHandler(w http.ResponseWriter, r *http.Request) {
 	var (
 		title = r.URL.Path[len("/view/"):]
-		page, _ = loadPage(title)
+		page, err = loadPage(title)
 	)
-	fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", page.Title, page.Body)
+
+	if title == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		_, err := w.Write([]byte("400 status bad request"))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+		return
+
+	} else if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	_, err = fmt.Fprintf(w, "<h1>%s</h1><div>%s</div>", page.Title, page.Body)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }
 
 func main() {
-	//savingPage := &Page{Title: "TestPage", Body: []byte(
-	//	"This is a sample page to saving and loading",
-	//)}
-	//savingPage.save()
-
-	//loadingPage, _ := loadPage("TestPage")
-	//fmt.Println(string(loadingPage.Body))
 
 	http.HandleFunc("/view/", viewHandler)
+	//http.HandleFunc("/edit/", editHandler)
+	//http.HandleFunc("/save/", saveHandler)
 	log.Fatal(http.ListenAndServe(":8000", nil))
+
 }
