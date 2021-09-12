@@ -32,11 +32,31 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 	)
 
 	if title == "" {
-		resBadRequest(w)
+		http.Redirect(w, r, "/save/" + title, http.StatusFound)
 		return
 	} else if err != nil {
 		page = &Page{Title: title}
 	}
 
 	renderTemplate(w, "edit", page)
+}
+
+// saveHandler handle http.Request to "/save/" route and
+// redirect to "/view/" after saving the wiki.
+func saveHandler(w http.ResponseWriter, r *http.Request) {
+	var (
+		title = r.URL.Path[len("/save/"):]
+		body = r.FormValue("body")
+	)
+
+	if title != "" {
+		page := &Page{Title: title, Body: []byte(body)}
+		err := page.save()
+		if err != nil {
+			resInternalServerError(w, err)
+			return
+		}
+	}
+
+	http.Redirect(w, r, "/view/" + title, http.StatusFound)
 }
