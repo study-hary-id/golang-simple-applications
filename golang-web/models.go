@@ -5,24 +5,23 @@ import "io/ioutil"
 // Page model to construct the content of a web page.
 type Page struct {
 	Title string
-	Body []byte
+	Body  []byte
 }
 
-// save writes file .txt to current local directory and
+// save writes file .txt to data/ directory and
 // return error if there is a problem while writing.
 func (p *Page) save() error {
-	filename := p.Title + ".txt"
+	filename := "data/" + p.Title + ".txt"
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
-// loadPage reads file .txt in current local directory and
+// loadPage reads file .txt in data/ directory and
 // return error if the file does not exist.
 func loadPage(title string) (*Page, error) {
 	var (
-		filename = title + ".txt"
+		filename  = "data/" + title + ".txt"
 		body, err = ioutil.ReadFile(filename)
 	)
-
 	if err != nil {
 		return nil, err
 	}
