@@ -16,7 +16,7 @@ func viewHandler(w http.ResponseWriter, r *http.Request) {
 		resBadRequest(w)
 		return
 	} else if err != nil {
-		http.NotFound(w, r)
+		http.Redirect(w, r, "/edit/" + title, http.StatusFound)
 		return
 	}
 
