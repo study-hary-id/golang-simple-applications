@@ -4,7 +4,7 @@ This project is a list of simple applications/systems built with **Golang**.
 
 ![Gopher Dance](images/gopher-dance.gif)
 
-## <img src="images/pushing-cart.png" alt="Gopher pushing cart" width="24"> List Applications
+## <img src="images/pushing-cart.png" alt="Gopher pushing cart" width="48"> List Applications
 
 1. [Hello World app](hello_world.go)
 2. [Use quote package](go_quote.go)
